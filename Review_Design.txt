@@ -1,0 +1,125 @@
+// App.jsx
+import ReviewCard from './components/Review_Design';
+import './App.css';
+
+import Review1Normal from './assets/review1-1.jpg';
+import Review1Hover from './assets/review1-2.jpg';
+import Review2Normal from './assets/review2-1.jpg';
+import Review2Hover from './assets/review2-2.jpg';
+import Review3Normal from './assets/review3-1.jpg';
+import Review3Hover from './assets/review3-2.jpg';
+import Review4Normal from './assets/review4-1.jpg';
+import Review4Hover from './assets/review4-2.jpg';
+import Review5Normal from './assets/review5-1.jpg';
+import Review5Hover from './assets/review5-2.jpg';
+
+function App(){
+
+  const reviewlData=[
+    {
+      id: 1,
+      title: '바디랩',
+      imgNormal: Review1Normal,
+      imgHover: Review1Hover,
+      resultTitle: '리뷰보고 참고해서 구매했어요',
+      resultDesc: '거두절미하고 고민하시는 분은 사세요',
+      score: '⭐⭐⭐⭐⭐'
+    },
+    {
+      id: 2,
+      title: '바디랩',
+      imgNormal: Review2Normal,
+      imgHover: Review2Hover,
+      resultTitle: '2번째 구매인데 만족스럽네요',
+      resultDesc: '그냥 사서 써보시길 추천합니다',
+      score: '⭐⭐⭐⭐⭐'
+    },
+    {
+      id: 3,
+      title: '바디랩',
+      imgNormal: Review3Normal,
+      imgHover: Review3Hover,
+      resultTitle: '바디랩 제품은 처음 사봐요',
+      resultDesc: '빠른 배송, 포장상태, 색상, 퀄리티 모두 만족입니다',
+      score: '⭐⭐⭐⭐⭐'
+    },
+    {
+      id: 4,
+      title: '바디랩',
+      imgNormal: Review4Normal,
+      imgHover: Review4Hover,
+      resultTitle: '연휴인데도 배송해주시네요',
+      resultDesc: '빠른 배송 감사드려요',
+      score: '⭐⭐⭐⭐⭐'
+    },
+    {
+      id: 5,
+      title: '바디랩',
+      imgNormal: Review5Normal,
+      imgHover: Review5Hover,
+      resultTitle: '아이가 좋아해요',
+      resultDesc: '촉감이 부드러워서 너무 좋대요',
+      score: '⭐⭐⭐⭐⭐'
+    }
+  ]
+
+  
+  return(
+    <div className='review_wrap'>
+      <h2 className="main_title">베스트 리뷰</h2>
+      <p className='sub_title'>고객님들의 내돈내산 후기</p>
+
+        <div className='review_container'>
+          {reviewlData.map((review)=>(
+            <ReviewCard key={review.id} data={review} />
+          ))}
+        </div>
+
+        <button className='more_btn'>리뷰 더보기 ＞</button>
+    </div>
+  )
+}
+
+export default App;
+
+// App.css
+.review_wrap{
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: white;
+}
+
+.main_title{
+  color: #333;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.sub_title{
+  color: #777;
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+
+.review_container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.more_btn{
+  margin-top: 30px;
+  width: 200px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.07);
+}
+
+.more_btn:hover{
+  background-color: #f0f0f0;
+}

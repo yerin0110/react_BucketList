@@ -1,0 +1,148 @@
+import { useState } from "react";
+import './FlashCard.css'
+
+function FlashCard({ data, onCorrect }) {
+    const [isFlipped, setIsFlipped] = useState(false);
+    const [isScore, setIsScore] = useState(false);
+    const [isWrong, setIsWrong] = useState(false); // 오답 상태 추가
+
+    // 정답 체크 로직 (O, X 버튼 클릭 시)
+    const handleAnswerClick = (e, userChoice) => {
+        e.stopPropagation(); // 카드 뒤집힘 방지
+
+        // 데이터의 answer 첫 글자가 O(⭕)인지 X(❌)인지 확인하여 판별
+        // 만약 데이터에 별도 속성이 없다면 첫 글자로 비교합니다.
+        const isCorrectChoice = data.answer.includes(userChoice);
+
+        if (isCorrectChoice) {
+            onCorrect();
+            setIsScore(true);
+            setIsFlipped(true); // 맞으면 바로 뒤집기
+            setIsWrong(false);
+        } else {
+            setIsWrong(true); // 틀리면 오답 메시지 표시
+        }
+    };
+
+    // 다시 풀기 (틀렸을 때)
+    const handleRetry = (e) => {
+        e.stopPropagation();
+        setIsWrong(false);
+    };
+
+    // 정답 확인 (틀렸지만 답을 보고 싶을 때)
+    const handleShowAnswer = (e) => {
+        e.stopPropagation();
+        setIsFlipped(true);
+    };
+
+    return (
+        <div className={`flash_card ${isFlipped ? 'flipped' : ''}`}>
+            <div className="card_content">
+                {isFlipped ? (
+                    /* [뒷면] 정답 및 해설 */
+                    <div className="answer_wrap">
+                        <p className="answer_text">{data.answer}</p>
+                        <span className="done_text">학습 완료 👏</span>
+                    </div>
+                ) : (
+                    /* [앞면] 문제 + O/X 버튼 */
+                    <div className="question_wrap">
+                        <p className="question_text">{data.question}</p>
+                        
+                        {!isWrong ? (
+                            <div className="btn_group">
+                                <button className="answer_btn1" onClick={(e) => handleAnswerClick(e, '⭕')}>O</button>
+                                <button className="answer_btn2" onClick={(e) => handleAnswerClick(e, '❌')}>X</button>
+                            </div>
+                        ) : (
+                            <div className="wrong_wrap">
+                                <p className="wrong_msg">❌ 틀렸어요! 다시 풀어볼까요?</p>
+                                <div className="btn_group">
+                                    <button className="retry_btn" onClick={handleRetry}>다시 풀기</button>
+                                    <button className="show_btn" onClick={handleShowAnswer}>정답 확인</button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default FlashCard;
+
+import { useState } from "react";
+import './FlashCard.css';
+
+function FlashCard({ data, onCorrect }) {
+    const [isFlipped, setIsFlipped] = useState(false);
+    const [isScore, setIsScore] = useState(false);
+    const [isWrong, setIsWrong] = useState(false); 
+
+    // O, X 버튼 클릭 시 정답 체크
+    const handleAnswerClick = (e, userChoice) => {
+        e.stopPropagation(); // 카드 자체 클릭 이벤트 전파 방지
+
+        // data.isCorrect (true/false)와 사용자의 선택(true/false)을 직접 비교
+        if (userChoice === data.isCorrect) {
+            if (!isScore) {
+                onCorrect();
+                setIsScore(true);
+            }
+            setIsWrong(false);
+            setIsFlipped(true); // 정답이면 앞면(문제+버튼)을 뒤집음
+        } else {
+            setIsWrong(true); // 틀리면 오답 UI로 교체
+        }
+    };
+
+    // 다시 풀기: 오답 메시지를 지우고 다시 O/X 버튼을 보여줌
+    const handleRetry = (e) => {
+        e.stopPropagation();
+        setIsWrong(false);
+    };
+
+    // 정답 확인: 틀린 상태에서 바로 뒷면(해설)으로 뒤집음
+    const handleShowAnswer = (e) => {
+        e.stopPropagation();
+        setIsFlipped(true);
+    };
+
+    return (
+        <div className={`flash_card ${isFlipped ? 'flipped' : ''}`}>
+            <div className="card_content">
+                {isFlipped ? (
+                    <div className="answer_wrap">
+                        <p className="answer_label">🎉 정답입니다</p>
+                        <p className="answer_text">{data.answer}</p>
+                    </div>
+                ) : (
+                    <div className="question_wrap">
+                        {/* !isWrong일 때만 질문과 OX 버튼이 보이도록 수정 */}
+                        {!isWrong ? (
+                            <>
+                                <p className="question_text">{data.question}</p>
+                                <div className="btn_group">
+                                    <button className="answer_btn1" onClick={(e) => handleAnswerClick(e, true)}>O</button>
+                                    <button className="answer_btn2" onClick={(e) => handleAnswerClick(e, false)}>X</button>
+                                </div>
+                            </>
+                        ) : (
+                            <div className="wrong_wrap">
+                                <p className="wrong_msg">틀렸습니다</p>
+                                <div className="btn_group">
+                                    <button className="retry_btn" onClick={handleRetry}>다시 풀기</button>
+                                    <button className="show_btn" onClick={handleShowAnswer}>정답 확인</button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default FlashCard;

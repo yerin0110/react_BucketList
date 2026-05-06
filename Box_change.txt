@@ -1,0 +1,51 @@
+import {useState} from 'react';
+import './Box.css'
+
+function Box({initialColor, text}){
+    const [color, setColor]=useState(initialColor);
+
+    /* const changeColor=() => {
+        if(color === 'red')setColor('orange');
+        else if(color === 'orange')setColor('yellow');
+        else if(color === 'yellow')setColor('green');
+        else if(color === 'green')setColor('blue');
+        else if(color === 'blue')setColor('navy');
+        else if(color === 'navy')setColor('purple');
+        else setColor('red')
+    }; */
+
+    const rainboewColors=['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple']
+
+    const changeColor=() => {
+        const currentIndex=rainboewColors.indexOf(color);
+
+        let nextIndex=currentIndex+1;
+
+        if(nextIndex === rainboewColors.length){
+            nextIndex=0;
+        }
+
+        setColor(rainboewColors[nextIndex]);
+    }
+
+    return(
+        <div className='box' onClick={changeColor} style={{backgroundColor:color}}>
+            {text}
+        </div>
+    )
+}
+
+export default Box;
+
+// CSS
+.box{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}

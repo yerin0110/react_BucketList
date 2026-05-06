@@ -1,0 +1,191 @@
+import { useState } from "react";
+import TodoItem from './components/TodoItem';
+import './App.css';
+
+function App(){
+  const [inputValue, setInputValue]=useState('');
+  const [todoList, setTodoList]=useState([]);
+
+  const addTodo=()=>{
+    if(inputValue==='') return;
+
+    const newTodo={
+      id: Date.now(),
+      text: inputValue,
+      isDone: false
+    };
+
+    setTodoList([...todoList, newTodo]);
+    setInputValue('');
+  };
+
+  const deleteTodo=(targetId)=>{
+    const newTodoList=todoList.filter((todo)=>todo.id !== targetId);
+    setTodoList(newTodoList);
+  };
+
+  const toggleComplete=(targetId)=>{
+    const newTodoList=todoList.map((todo)=>{
+      if(todo.id===targetId){
+        return{...todo, isDone: !todo.isDone}
+      }
+      else{
+        return todo;
+      }
+    });
+    setTodoList(newTodoList);
+  }
+
+  return(
+    <div className="app_wrap">
+      <h2>📝 나의 할 일 목록</h2>
+      <div className="input_box">
+        <input type="text" placeholder="오늘 할 일을 입력하세요"
+          value={inputValue}
+          onChange={(e)=> setInputValue(e.target.value)}
+        />
+          <button onClick={addTodo}>추가</button>
+      </div>
+      <div className="todo_board">
+        {todoList.map((todo)=>(
+          <TodoItem
+            key={todo.id}
+            data={todo}
+            onDelete={deleteTodo}
+            onToggle={toggleComplete}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+// App.css
+.app_wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+h2{
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.input_box{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.input_box input{
+  width: 250px;
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input_box input:focus{
+  border-color: #4a90e2;
+}
+
+.input_box button{
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.input_box button:hover{
+  background-color: #357abd;
+}
+
+.todo_board{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+// TodoItem.jsx
+import './TodoItem.css';
+
+function TodoItem({data, onDelete, onToggle}){
+    return(
+        <div className={`todo_item ${data.isDone ? 'done' : ''}`}>
+            <div className="todo_content" onClick={()=>onToggle(data.id)}>
+                <span className="checkbox">
+                {data.isDone ? '✅' : '⬜'}
+                </span>
+                <p className="todo_text">{data.text}</p>
+            </div>
+            <button className="delete_btn" onClick={()=>onDelete(data.id)}>삭제</button>
+        </div>
+    )
+}
+
+export default TodoItem;
+
+// TodoItem.css
+.todo_item{
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #4a90e2;
+}
+
+.todo_content{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.todo_text{
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+    transition: all 0.3s;
+}
+
+.todo_item.done{
+    background-color: #f8f9fa;
+    border-left-color: #ced4da;
+}
+
+.todo_item.done .todo_text{
+    color: #adb5bd;
+    text-decoration: line-through;
+}
+
+.delete_btn{
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.delete_btn:hover{
+    background-color: #ee5253;
+}

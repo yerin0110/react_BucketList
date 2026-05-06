@@ -1,0 +1,29 @@
+// App.jsx
+import PhotoSlider from './components/PhotoSlider';
+import './App.css'
+
+function App(){
+  return(
+    <div className='app_wrap'>
+      <h2 className="main_title">경주 문화재, 유적지 탐방 슬라이더</h2>
+      <PhotoSlider />
+    </div>
+  )
+}
+
+export default App;
+
+// App.css
+.app_wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.main_title{
+  color: #333;
+  margin-bottom: 20px;
+}

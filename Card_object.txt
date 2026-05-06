@@ -1,0 +1,121 @@
+// App.jsx
+import Card from './components/Card';
+import './App.css'
+import { useState } from 'react';
+
+function App(){
+  const [selected, setSelected]=useState(null);
+
+  const data=[
+    {
+      id: 1,
+      title: 'React',
+      desc: '프론트엔드 라이브러리',
+      img: 'http://picsum.photos/200/140?1',
+    },
+    {
+      id: 2,
+      title: 'JavaScript',
+      desc: '웹의 핵심 언어',
+      img: 'http://picsum.photos/200/140?2',
+    },
+    {
+      id: 3,
+      title: 'CSS',
+      desc: '스타일링 담당',
+      img: 'http://picsum.photos/200/140?3',
+    }
+  ];
+
+  return(
+    <div className='container'>
+      {data.map((item)=>(
+        <Card key={item.id} {...item} selected={selected} setSelected={setSelected} />
+      ))}
+
+      {/* {...item} == {item.title} {item.desc} {item.img} */}
+    </div>
+  );
+}
+
+export default App
+
+// App.css
+.container{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+// Card.jsx
+import './Card.css'
+
+function Card({id, title, desc, img, selected, setSelected}){
+    const isSelected=selected===id;
+
+    return(
+        <div className={`card ${isSelected ? 'selected' : ''}`} onClick={()=>setSelected(id)}>
+            <img src={img} alt={title} />
+            <div className='card-body'>
+                <div className="card-title">{title}</div>
+                <div className="card-desc">{desc}</div>
+                <button>자세히 보기</button>
+            </div>
+        </div>
+    );
+}
+
+export default Card;
+
+// Card.css
+.card{
+    width: 220px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: white;
+}
+
+.card:hover{
+    transform: translateY(-10px);
+}
+
+.card.selected{
+    border: 3px solid #ff6b6b;
+    transform: scale(1.05);
+}
+
+.card img{
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.card-body{
+    padding: 15px;
+}
+
+.card-title{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-desc{
+    font-size: 14px;
+    color: gray;
+    margin: 10px 0;
+}
+
+.card button{
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background-color: #4dabf7;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}

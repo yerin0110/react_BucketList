@@ -1,0 +1,53 @@
+// App.jsx
+import PhotoSlider from './components/ProfileSlider';
+import './App.css'
+import { useState } from 'react';
+
+function App(){
+
+  const imgs=[
+    'https://i.namu.wiki/i/ft7Te828xXJDnRWELWhSgos2Dbx7ZRjvvb5igOnwu1Ankm5bv4LBxSXILyvZDUANV1vRdCDsh2tmKDcnU0VRv6PtNj1StnnOiN__wuclZbetb_TEek2KSDttD9VUSvEh06tFQBpFMPBHhFarogfwaA.webp',
+    'https://i.namu.wiki/i/HEEUyQT9mXKJUVU-Rr6nEtgKOgq2z_FG2ylDPVSue3uXnxdgFrlFCplqGpPrif1ZtB5ifmF7lHpu4-MGR4Gkx8SqFu2Hf05kXNiMSYPgcGoNLki-_1ym_C-L7FN89c7ynB3Z0-p1CwQEqrjHmDfL-w.webp',
+    'https://i.namu.wiki/i/NvsrxHWHhjvuE8CLFNMaRoYZJB6LnRmCnZW9jc-rtxGJN3Cy86EG5dEs5DGJPC1Ktrg4Vf8Vag3mBE2mtGSs5drYgftjtMQL2yvCQmD2uqyON-J_FFD9PifW1rg7fHOzDP_JCxHZ8BnQqB-OmQEFww.webp'
+  ]
+  const names=['치이카와', '하치와레', '우사기']
+
+  const [currentIndex, setCurrenIndex]=useState(0);
+
+  const changeProfile=()=>{
+    let nextIndex=currentIndex+1;
+
+    if(nextIndex===imgs.length){
+        nextIndex=0;
+    }
+    setCurrenIndex(nextIndex);
+  }
+
+  return(
+    <div className='app_wrap'>
+      <h2 className="main_title">치이카와 캐릭터 슬라이더</h2>
+        <PhotoSlider 
+          currentImg={imgs[currentIndex]} 
+          currentName={names[currentIndex]} 
+          onSliderClick={changeProfile} 
+        />
+    </div>
+  )
+}
+
+export default App;
+
+// App.css
+.app_wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.main_title{
+  color: #333;
+  margin-bottom: 20px;
+}

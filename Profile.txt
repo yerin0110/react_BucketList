@@ -1,0 +1,103 @@
+// App.jsx
+import Card from './components/Profile';
+import './App.css'
+import { useState } from 'react';
+
+function App(){
+  const [selected, setSelected]=useState(null);
+
+  const data=[
+    {
+      id: 1,
+      name: '치이카와',
+      tribe: '햄스터',
+      va_jap: '아오키 하루카',
+      va_ko: '이주은',
+      desc: '살짝 울보지만 상냥한 성격. 풀뽑기나 토벌 등을 하며 생활하고 있다.',
+      img: 'https://i.namu.wiki/i/ft7Te828xXJDnRWELWhSgos2Dbx7ZRjvvb5igOnwu1Ankm5bv4LBxSXILyvZDUANV1vRdCDsh2tmKDcnU0VRv6PtNj1StnnOiN__wuclZbetb_TEek2KSDttD9VUSvEh06tFQBpFMPBHhFarogfwaA.webp',
+    },
+    {
+      id: 2,
+      name: '하치와레',
+      tribe: '고양이',
+      va_jap: '타나카 마코토',
+      va_ko: '손정민',
+      desc: '치이카와의 친구. 밝고 긍정적이다. 동굴에서 생활하고 있다.',
+      img: 'https://i.namu.wiki/i/HEEUyQT9mXKJUVU-Rr6nEtgKOgq2z_FG2ylDPVSue3uXnxdgFrlFCplqGpPrif1ZtB5ifmF7lHpu4-MGR4Gkx8SqFu2Hf05kXNiMSYPgcGoNLki-_1ym_C-L7FN89c7ynB3Z0-p1CwQEqrjHmDfL-w.webp',
+    },
+    {
+      id: 3,
+      name: '우사기',
+      tribe: '토끼',
+      va_jap: '오자와 아리',
+      va_ko: '권다예',
+      desc: "치이카와의 친구. '우라', '야하' 하고 곧잘 소리를 지른다.",
+      img: 'https://i.namu.wiki/i/NvsrxHWHhjvuE8CLFNMaRoYZJB6LnRmCnZW9jc-rtxGJN3Cy86EG5dEs5DGJPC1Ktrg4Vf8Vag3mBE2mtGSs5drYgftjtMQL2yvCQmD2uqyON-J_FFD9PifW1rg7fHOzDP_JCxHZ8BnQqB-OmQEFww.webp',
+    },
+    {
+      id: 4,
+      name: '모몽가',
+      tribe: '하늘다람쥐',
+      va_jap: '이구치 유카',
+      va_ko: '미소',
+      desc: '언제나 귀여운 척을 하고 있다. 이것저것 조르곤 한다.',
+      img: 'https://i.namu.wiki/i/70XyR_1oa7iSWw8lo2acRGnqVrThVcSJuVq1-ubR9Xj7vP4bCRuUkMNmfOZ57icwJFTnPSs1dEMUJ9bu2HMPsVuVW-4aoFUp7l1ZNw1Btvq0KngM2ZJ94-ZXNMVRGomzoOEjTbxWRmAX1czNLMQ8DQ.webp',
+    },
+    {
+      id: 5,
+      name: '쿠리만쥬',
+      tribe: '밤만쥬, 수달',
+      va_jap: '아사이 타카유키',
+      va_ko: '원종준',
+      desc: '보기에는 귀엽지만...!? 미식가이며 남을 잘 돌봐 준다.',
+      img: 'https://i.namu.wiki/i/h_BuSNb-GbqS9UC15s8wPUgV60v_lPgoWoumVECz4WIgveoySSi0jzw3Drc1Doq-sIIeE0XoSy8MeZdTaM7o-7v4WKV_xpiYmvwrqkXfY6dZmItpkhULwKKnF-fVoRc2m_2Uz33JNeDcUqgj3TT9NA.webp',
+    },
+    {
+      id: 6,
+      name: '랏코',
+      tribe: '해달',
+      va_jap: '우치다 유우마',
+      va_ko: '이동윤',
+      desc: '토벌에 능하고 강하다. 치이카와와 친구들이 동경하는 존재.',
+      img: 'https://i.namu.wiki/i/oVrmFS6zkcuhCyxJQ_4Pnod0Ngm41gwuamSm0EMQx8OjcfutlGhUOMpd8iWzNcGrUZMsvUswSEcrZ0kwbrIbndsZ8p1ZSmevrcGoWwvHgSWo9Jeqi2-0OBm0xTq47Mo_jvCykMdYKmDUSTAtFdYlmQ.webp',
+    },
+    {
+      id: 7,
+      name: '시사',
+      tribe: '시사',
+      va_jap: '시마부크로 미유리',
+      va_ko: '장채연',
+      desc: "라멘 가게 <로우>의 조수. 라멘 갑옷씨를 '사부님'이라고 부른다.",
+      img: 'https://i.namu.wiki/i/oJ-Ehd71t9eacOg0sTbVnf8W6Eua2NnI5yp1nex2QTCnOUV4L1aNxsF3abn8kV7INHcHn3iEqD05BZTJSqB07n8cQdXj4_Hm7TOyBEu42GAQd5WSeZVREveDfUJGJwQF9JmGqzcijgqNf7uFunGg0A.webp',
+    },
+    {
+      id: 8,
+      name: '카니',
+      tribe: '게',
+      va_jap: '?',
+      va_ko: '?',
+      desc: '원래 얼굴이 나오지 않고 가끔 등장하던 헌책방을 운영하는 노점상 모브 캐릭터였으나, 모몽가와 친해진 이후로 이름과 얼굴이 공개되었다',
+      img: 'https://i.namu.wiki/i/kLw5t2qzmXGDy_zG5JbKI0HurdpAosr3xnXeSJDnoKNoKuvjhCiKIvpNoVZC4rikD08NsmoyFehetLk3U5Tzx1RxEpVUJvHgPc3aX12eiugjziVi0ZPsJIWs4H8OAMJgm75YHv0cdm3nv9ILGULBlw.webp',
+    }
+  ];
+
+  return(
+    <div className='container'>
+      {data.map((item)=>(
+        <Card key={item.id} {...item} selected={selected} setSelected={setSelected} />
+      ))}
+    </div>
+  );
+}
+
+export default App
+
+// App.css
+.container{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+

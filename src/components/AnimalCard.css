@@ -1,0 +1,39 @@
+.animal_card{
+    width: 250px;
+    height: 380px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.result_content{
+    width: 250px;
+    height: 380px;
+    background-color: orange;
+    border-radius: 20px;
+    position: absolute;
+}
+
+.result_content h3{
+    color: black;
+}
+
+.result_content p{
+    color: black;
+}
+
+.img_content{
+    width: 250px;
+    height: 300px;
+}
+
+.img_content img{
+    width: 250px;
+    height: 300px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.animal_name{
+    color: brown;
+}

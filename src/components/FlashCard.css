@@ -1,0 +1,104 @@
+.flash_card{
+    width: 300px;
+    height: 230px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.flash_card.flipped{
+    background-color: #e3f2fd;
+    border: 2px solid #2196f3;
+    transform: translateY(-5px);
+}
+
+.card_content{
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+.answer_wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.correct_btn{
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.correct_btn:hover{
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.done_text{
+    color: #888;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.question_text{
+    color: #333;
+}
+
+.answer_text{
+    color: #2196f3;
+}
+
+.btn_group{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.answer_btn1, .answer_btn2{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    border: none;
+}
+
+.answer_btn1{
+    background-color: #45a049;
+}
+
+.answer_btn2{
+    background-color: #ff3c3c;
+}
+
+.retry_btn, .show_btn{
+    width: 80px;
+    height: 35px;
+    border-radius: 7px;
+    font-weight: bold;
+    border: none;
+}
+
+.show_btn{
+    background-color: #2196f3;
+    color: white;
+}

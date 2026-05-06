@@ -1,0 +1,74 @@
+// App.jsx
+import AnimalCard from './components/AnimalCard';
+import './App.css';
+
+import DogNormal from './assets/Dog_Normal.jpg';
+import DogHover from './assets/Dog_Hover.jpg';
+import CatNormal from './assets/Cat_Normal.jpg';
+import CatHover from './assets/Cat_Hover.jpg';
+import RabbitNormal from './assets/Rabbit_Normal.jpg';
+import RabbitHover from './assets/Rabbit_Hover.jpg';
+
+function App(){
+
+  const animalData=[
+    {
+      id: 1,
+      name: '강아지',
+      imgNormal: DogNormal,
+      imgHover: DogHover,
+      resultTitle: '멍!',
+      resultDesc: ''
+    },
+    {
+      id: 2,
+      name: '고양이',
+      imgNormal: CatNormal,
+      imgHover: CatHover,
+      resultTitle: '야옹!',
+      resultDesc: ''
+    },
+    {
+      id: 3,
+      name: '토끼',
+      imgNormal: RabbitNormal,
+      imgHover: RabbitHover,
+      resultTitle: '깡총!',
+      resultDesc: ''
+    }
+  ]
+
+  
+  return(
+    <div className='gallery_wrap'>
+      <h2 className="main_title">동물을 선택해 보세요</h2>
+        <div className='card_container'>
+          {animalData.map((animal)=>(
+            <AnimalCard key={animal.id} data={animal} />
+          ))}
+        </div>
+    </div>
+  )
+}
+
+export default App;
+
+// App.css
+.gallery_wrap{
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #fff2d0;
+}
+
+.main_title{
+  color: #333;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.card_container{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}

@@ -1,0 +1,61 @@
+.app_wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+  background-color: aliceblue;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+h2{
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.input_box{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.input_box input{
+  width: 450px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input_box input:focus{
+  border-color: #4a90e2;
+}
+
+.input_box button{
+  width: 100px;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.input_box button:hover{
+  background-color: #357abd;
+}
+
+.bucket_board{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 550px;
+}
