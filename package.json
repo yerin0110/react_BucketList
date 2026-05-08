@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/yerin0110/React_practice",
+  "homepage": "https://github.com/yerin0110/react_BucketList",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
